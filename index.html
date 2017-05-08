@@ -14,9 +14,12 @@
 </head>
 <body>
 
+    <audio autoplay loop>     
+        <source src="assets/pacman_tune.wav" type="audio/mp3">
+    </audio>
     <script type="text/javascript">
 
-    var game = new Phaser.Game(448, 496, Phaser.AUTO);
+    var game = new Phaser.Game(520, 580, Phaser.AUTO);
 
     var Pacman = function (game) {
 
@@ -38,11 +41,11 @@
 
         this.current = Phaser.NONE;
         this.turning = Phaser.NONE;
-        
-        //eisagwgh score
+
+        // score
         this.score=0;
         this.scoreText='';
-
+        
     };
 
     Pacman.prototype = {
@@ -63,7 +66,7 @@
 
             //  We need this because the assets are on github pages
             //  Remove the next 2 lines if running locally
-            this.load.baseURL = 'https://ioniodi.github.io/pacman/';
+            this.load.baseURL = 'https://isoqar.github.io/pacman/';
             this.load.crossOrigin = 'anonymous';
 
             this.load.image('dot', 'assets/dot.png');
@@ -106,8 +109,8 @@
             this.pacman.play('munch');
             this.move(Phaser.LEFT);
             
-            //topothethsh keimenou tou score
-            this.scoreText = game.add.text(0, 500, 'Score: 0', { fontSize: '34px Arial', fill: 'red' });
+            //emfanizei to keimeno tou score kai to arxikopoiei
+            this.scoreText = game.add.text(0, 520, 'Score: 0', { fontSize: '34px Arial', fill: 'green' });
 
         },
 
@@ -228,10 +231,10 @@
         eatDot: function (pacman, dot) {
 
             dot.kill();
-            //mousiki sto fagoma
+            //eisagwgh hxou sto fagwma
             var audio = new Audio('assets/pacman_tik.mp3');
             audio.play()
-            //score
+            //eisagwgh score
             this.score+=10;
             this.scoreText.text= 'Score: ' + this.score;
 
