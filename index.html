@@ -13,7 +13,11 @@
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
 </head>
 <body>
-
+<audio autoplay loop>
+        <source src="assets/sony.mp3" type="audio/mp3">
+</audio>
+    
+    
     <script type="text/javascript">
 
     var game = new Phaser.Game(448, 496, Phaser.AUTO);
@@ -79,12 +83,18 @@
             this.layer = this.map.createLayer('Pacman');
 
             this.dots = this.add.physicsGroup();
+            this.cherries = this.add.physicsGroup();
+	        this.serdots = this.add.physicsGroup();
 
             this.map.createFromTiles(7, this.safetile, 'dot', this.layer, this.dots);
-
+            this.map.createFromTiles(16, this.safetile, 'serdot', this.layer, this.serdots);
+		    this.map.createFromTiles(35, this.safetile, 'cherry', this.layer, this.cherries);
+            
             //  The dots will need to be offset by 6px to put them back in the middle of the grid
             this.dots.setAll('x', 6, false, false, 1);
             this.dots.setAll('y', 6, false, false, 1);
+            this.serdots.setAll('x', 6, false, false, 1);
+            this.serdots.setAll('y', 6, false, false, 1);
 
             //  Pacman should collide with everything except the safe tile
             this.map.setCollisionByExclusion([this.safetile], true, this.layer);
@@ -101,6 +111,32 @@
 
             this.pacman.play('munch');
             this.move(Phaser.LEFT);
+            
+             this.bonusText = game.add.text(350, 500, 'Bonus: 0', { fontSize: '20px Arial', fill: 'orange' });
+            
+            
+            this.scoreText = game.add.text(0, 500, 'Score: 0', { fontSize: '20px Arial', fill: 'yellow' });
+            
+            lives = game.add.group();
+            game.add.text(game.world.width - 340, 500, 'Lives : ', { fontSize: '20px Arial', fill: 'white' });
+            
+            for (var i = 0; i < 3; i++) 
+		    {
+			var pacman = lives.create(game.world.width - 235 + (30 * i), 517, 'pacman');
+			pacman.anchor.setTo(0.5, 0.5);
+			pacman.angle = 90;
+			pacman.alpha = 0.4;
+		    }
+	    var sprite = game.add.sprite(317, 465, 'cherry');
+	    var sprite1 = game.add.sprite(87, 265, 'cherry');
+	    var sprite2 = game.add.sprite(355, 192, 'cherry');
+            
+		
+	    
+	    game.add.tween(sprite).to( { alpha: 0 }, 30000, Phaser.Easing.Linear.None, true);
+	    game.add.tween(sprite1).to( { alpha: 0 }, 50000, Phaser.Easing.Linear.None, true);
+            game.add.tween(sprite2).to( { alpha: 0 }, 70000, Phaser.Easing.Linear.None, true);
+           
 
         },
 
@@ -222,18 +258,38 @@
 
             dot.kill();
 
+            this.score += 10;
+            this.scoreText.text = 'Score: ' +  this.score;
+            
             if (this.dots.total === 0)
             {
                 this.dots.callAll('revive');
             }
 
         },
+        
+           eatserdot: function (pacman, serdot) {
+       
+            serdot.kill();
+            
+               this.score+=15;
+               this.bonus+=15;									
+               this.scoreText.text= 'Score: ' + this.score;
+               this.bonusText.text= 'Bonus: ' + this.bonus;
+		
+           if (this.serdots.total === 0)
+           {
+               this.serdots.callAll('revive');
+           }
+        },
+        
 
         update: function () {
           
             this.physics.arcade.collide(this.pacman, this.layer);
             this.physics.arcade.overlap(this.pacman, this.dots, this.eatDot, null, this);
-
+            this.physics.arcade.overlap(this.pacman, this.serdots, this.eatserdot, null, this);
+            
             this.marker.x = this.math.snapToFloor(Math.floor(this.pacman.x), this.gridsize) / this.gridsize;
             this.marker.y = this.math.snapToFloor(Math.floor(this.pacman.y), this.gridsize) / this.gridsize;
 
