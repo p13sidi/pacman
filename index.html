@@ -86,8 +86,8 @@
            
 
             this.map.createFromTiles(7, this.safetile, 'dot', this.layer, this.dots);
-            this.map.createFromTiles(16, this.safetile, 'serdot', this.layer, this.serdots);
-		    this.map.createFromTiles(35, this.safetile, 'cherry', this.layer, this.cherries);
+		
+		this.map.createFromTiles(35, this.safetile, 'cherry', this.layer, this.cherries);
             
             //  The dots will need to be offset by 6px to put them back in the middle of the grid
             this.dots.setAll('x', 6, false, false, 1);
@@ -263,21 +263,6 @@
                 this.dots.callAll('revive');
             }
 
-        },
-        
-           eatserdot: function (pacman, serdot) {
-       
-            serdot.kill();
-            
-               this.score+=15;
-               this.bonus+=15;									
-               this.scoreText.text= 'Score: ' + this.score;
-               this.bonusText.text= 'Bonus: ' + this.bonus;
-		
-           if (this.serdots.total === 0)
-           {
-               this.serdots.callAll('revive');
-           }
         },
         
 
