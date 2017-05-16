@@ -70,6 +70,7 @@
             this.load.crossOrigin = 'anonymous';
 
             this.load.image('dot', 'assets/dot.png');
+		            this.load.image('cherry', 'assets/cherry.png');
             this.load.image('tiles', 'assets/pacman-tiles.png');
             this.load.spritesheet('pacman', 'assets/pacman.png', 32, 32);
             this.load.tilemap('map', 'p13sidi/pacman/tree/master/assets/pacman-map.json', null, Phaser.Tilemap.TILED_JSON);
@@ -86,6 +87,7 @@
             this.layer = this.map.createLayer('Pacman');
 
             this.dots = this.add.physicsGroup();
+            this.cherry = this.add.physicsGroup();
            
 
             this.map.createFromTiles(7, this.safetile, 'dot', this.layer, this.dots);
@@ -268,7 +270,17 @@
 
         },
         
-
+ 	 eatCherry: function(pacman,cherry){
+            cherry.kill();
+	    this.bonus+=10;//anebasma score
+            this.bonusText.text= 'Bonus: ' + this.bonus;
+	    this.score+=10;
+	    this.scoreText.text= 'Score: ' + this.score;
+	    
+        },
+	    
+	    
+	    
         update: function () {
           
             this.physics.arcade.collide(this.pacman, this.layer);
