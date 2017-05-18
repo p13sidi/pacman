@@ -78,7 +78,7 @@
 
             this.load.image('dot', 'assets/dot.png');
 	    this.load.image('cherry', 'assets/cherry.png');
-            this.load.image('tiles', 'assets/pacman-tiles.png');
+            this.load.image('tiles', 'assets/pacman-stage.png');
             this.load.spritesheet('pacman', 'assets/pacman.png', 32, 32);
             this.load.tilemap('map', 'assets/pacman-map.json', null, Phaser.Tilemap.TILED_JSON);
 
@@ -141,7 +141,7 @@
 		    }
 	    var sprite = game.add.sprite(317, 465, 'cherry');
 	    var sprite1 = game.add.sprite(87, 265, 'cherry');
-	    var sprite2 = game.add.sprite(355, 192, 'cherry');
+	    var sprite2 = game.add.sprite(345, 192, 'cherry');
             
 		
 	    
@@ -295,7 +295,8 @@
           
             this.physics.arcade.collide(this.pacman, this.layer);
             this.physics.arcade.overlap(this.pacman, this.dots, this.eatDot, null, this);
-            
+	    this.physics.arcade.overlap(this.pacman, this.cherries, this.eatCherry, null, this);
+
             this.marker.x = this.math.snapToFloor(Math.floor(this.pacman.x), this.gridsize) / this.gridsize;
             this.marker.y = this.math.snapToFloor(Math.floor(this.pacman.y), this.gridsize) / this.gridsize;
 
