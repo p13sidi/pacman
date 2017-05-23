@@ -144,9 +144,9 @@
             
 		
 	    
-	game.add.tween(sprite).to( { alpha: 0 }, 30000, Phaser.Easing.Linear.None, true);
-	game.add.tween(sprite1).to( { alpha: 0 }, 50000, Phaser.Easing.Linear.None, true);
-        game.add.tween(sprite2).to( { alpha: 0 }, 70000, Phaser.Easing.Linear.None, true);
+	game.add.tween(sprite).to( { alpha: 0 }, 3000, Phaser.Easing.Linear.None, true);
+	game.add.tween(sprite1).to( { alpha: 0 }, 5000, Phaser.Easing.Linear.None, true);
+        game.add.tween(sprite2).to( { alpha: 0 }, 7000, Phaser.Easing.Linear.None, true);
            
 		
 		
@@ -288,10 +288,7 @@
             this.bonus += 10;
             this.bonusText.text = 'Bonus: ' +  this.bonus;
             
-           if (this.cherry.total === 0)
-           {
-             this.cherry.callAll('revive');
-           }
+          
 
         },  
 	    
