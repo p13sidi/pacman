@@ -278,6 +278,15 @@
             {
                 this.dots.callAll('revive');
             }
+		
+		
+	if (this.cherry.total === 0) 
+	   {
+		   if (this.dots.total === 0)
+		   {
+			   this.cherry.callAll('revive');
+		   }
+	   }
 
         },
 	    
