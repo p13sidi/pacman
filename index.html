@@ -96,12 +96,14 @@
            
 
             this.map.createFromTiles(7, this.safetile, 'dot', this.layer, this.dots);
-            this.map.createFromTiles(7, this.safetile, 'cherry', this.layer, this.cherry);
+            this.map.createFromTiles(17, this.safetile, 'cherry', this.layer, this.cherry);
 		            
             //  The dots will need to be offset by 6px to put them back in the middle of the grid
             this.dots.setAll('x', 6, false, false, 1);
             this.dots.setAll('y', 6, false, false, 1);
-            
+            this.cherry.setAll('x', 15, false, false, 1);
+            this.cherry.setAll('y', 15, false, false, 1);   
+		
             //  Pacman should collide with everything except the safe tile
             this.map.setCollisionByExclusion([this.safetile], true, this.layer);
 
