@@ -279,24 +279,24 @@
                 this.dots.callAll('revive');
             }
 		
-		
+		eatcherry: function (pacman, cherry) {
+
+            		cherry.kill();
+
+            		this.bonus += 10;
+            		this.bonusText.text = 'Bonus: ' +  this.bonus;
+            
+        		if (this.cherry.total === 0 && this.dots.total === 0) 
+	  		{
+				this.cherry.callAll('revive');
+			}
+		   
+		}
 	
 
         },
 	    
-	  eatcherry: function (pacman, cherry) {
-
-            cherry.kill();
-
-            this.bonus += 10;
-            this.bonusText.text = 'Bonus: ' +  this.bonus;
-            
-        	if (this.cherry.total === 0 && this.dots.total === 0) 
-	  	{
-			this.cherry.callAll('revive');
-		}
-		   
-	},  
+	  
 	    
         update: function () {
           
