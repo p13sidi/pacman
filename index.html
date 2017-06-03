@@ -18,7 +18,7 @@
 <body>
 
      <audio autoplay loop>     
-        <source src="assets/pacman_tik.mp3" type="audio/mp3">
+        <source src="assets/pacman_tune.mp3" type="audio/mp3">
     </audio>
     
     <script type="text/javascript">
@@ -288,11 +288,13 @@
         eatDot: function (pacman, dot) {
 
             dot.kill();
-
+		//eisagwgh hxou
+		audio.play()
+	var audio = new Audio('assets/pacman_tik.mp3');
+	//eisagwgh score
             this.score += 10;
             this.scoreText.text = 'Score: ' +  this.score;
-             audio.play()
-
+           
             if (this.dots.total === 0)
             {
                 this.dots.callAll('revive');
